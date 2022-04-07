@@ -1,0 +1,438 @@
+/** -------------------- Général -------------------- */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+* {
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+}
+
+b {
+  font-weight: 700;
+}
+
+html,
+body {
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+main {
+  width: 85%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/** -------------------- HEADER -------------------- */
+#logo {
+  height: 100px;
+  width: auto;
+}
+
+
+/** -------------------- SECTION RECHERCHE -------------------- */
+#search-section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+/** -------------------- BARRE DE RECHERCHE -------------------- */
+#searchbar {
+  width: 100%;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e7e7e7;
+  background-image: url(../../assets/search-solid.svg);
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: 99% 50%;
+  color: black;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+
+#searchbar:focus {
+  outline: 3px solid #ed6454;
+}
+
+#searchbar::placeholder {
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 990px) {
+  #searchbar {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #searchbar {
+    font-size: 12px;
+  }
+}
+
+
+/** -------------------- RECHERCHE PAR TAG -------------------- */
+#search_subfilters {
+  display: flex;
+  justify-self: start;
+}
+
+#search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+#search_combobox-container {
+  display: flex;
+  justify-self: start;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 990px) {
+  #search_combobox-container {
+    justify-content: center;
+  }
+}
+
+
+.tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  width: max-content;
+  padding: 9px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px 20px 5px 0;
+}
+
+.tag-btn {
+  background: none;
+  color: white;
+  margin-left: 9px;
+  border: none;
+  cursor: pointer;
+}
+.tag-btn::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f057";
+}
+
+.ingredients-tag {
+  background-color: #3282f7;
+}
+
+.appliances-tag {
+  background-color: #68d9a4;
+}
+
+.ustensils-tag {
+  background-color: #ed6454;
+}
+
+.combobox {
+  margin: 20px 20px 0 0;
+  border-radius: 5px;
+  overflow: hidden;
+  min-width: 130px;
+}
+
+.combobox-controls {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px 5px 0 0;
+}
+
+.combobox-btn {
+  height: 70px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  font-size: 18px;
+  position: relative;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+}
+.combobox-btn::after {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f107";
+}
+
+.combobox-input {
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  outline: none;
+  padding: 0 15px;
+  height: 70px;
+  width: min-content;
+  background-color: transparent;
+}
+.combobox-input::placeholder {
+  color: white;
+  opacity: 1;
+}
+.combobox-input.expanded::placeholder {
+  opacity: 0.5;
+}
+
+.combobox-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 50px;
+  line-height: 1em;
+  max-height: 12em;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 0 0 5px 5px;
+  overflow-y: scroll;
+  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1);
+  scrollbar-width: thin;
+}
+.combobox-list li {
+  cursor: pointer;
+}
+
+#ingredients-controls {
+  background-color: #3282f7;
+}
+
+#appliances-controls {
+  background-color: #68d9a4;
+}
+
+#ustensils-controls {
+  background-color: #ed6454;
+}
+
+#ingredients-list {
+  background-color: #3282f7;
+}
+
+#appliances-list {
+  background-color: #68d9a4;
+}
+
+#ustensils-list {
+  background-color: #ed6454;
+}
+
+/** -------------------- SECTION RESULTAT -------------------- */
+#result-section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media screen and (max-width: 990px) {
+  #result-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  #result-section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.recipe-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  min-width: 350px;
+  min-height: 360px;
+  border-radius: 5px;
+  background-color: #E7E7E7;
+  overflow: hidden;
+  margin: 0;
+}
+
+
+.recipe-thumbnail {
+  background-color: #c7bebe;
+  width: 100%;
+  height: 180px;
+  border-radius: 5px 5px 0 0;
+}
+
+.recipe-details {
+  width: 100%;
+  min-height: 186px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.recipe-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 24px;
+  margin: 16px;
+}
+
+.recipe-title {
+  grid-area: title;
+  font-size: 18px;
+}
+
+.recipe-time-icon {
+  width: 25px;
+  padding-right: 7px;
+  margin: auto;
+  font-weight: 900;
+}
+
+.recipe-time {
+  font-weight: 900;
+}
+
+.recipe-details-main {
+  display: flex;
+  min-width: 302px;
+  line-height: 1.2em;
+  font-size: 0.75em;
+  margin: 16px;
+}
+
+.recipe-ingredients {
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  padding: 0 1em 0 0;
+  
+}
+
+.recipe-description {
+  width: 50%;
+  font-size: 12px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
