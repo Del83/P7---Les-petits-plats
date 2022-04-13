@@ -94,30 +94,6 @@ function displayRecipes() {
   });
 }
 
-/* ---------- Affichage des recettes avec des boucles natives ---------- */
-function displayRecipess() {
-  for (let i = 0; i < currentRecipes.length; i++) {
-    let obRecipe = new Recipe(currentRecipes[i]);
-    domSectionResult.appendChild(obRecipe.createRecipeCard());
-  }
-
-  inputSearch.addEventListener("input", (e) => {
-    const inputSearchContent = e.target.value.toLowerCase();
-
-    if (inputSearchContent.length >= 3) {
-      domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
-
-      for (const element of currentRecipes) {
-        const match = findIn(inputSearchContent, element);
-        if (match == true) {
-          let obRecipes = new Recipe(element);
-          domSectionResult.appendChild(obRecipes.createRecipeCard());
-        }
-      }
-    }
-  });
-}
-
 const init = () => {
   initList();
   displayRecipes();
