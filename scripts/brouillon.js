@@ -57,6 +57,34 @@ const init = () => {
 };
 init();
 
+export function makeArray() {
+  for (let i = 0; i < recipes.length; i++) {
+    const test = recipes[i].ingredients;
+    for (let i = 0; i < test.length; i++) {
+      ingredientstList.push(test[i].ingredient);
+      bubbleSort(ingredientstList);
+    }
+  }
+}
+
+export function makeArrayy() {
+  for (let i = 0; i < recipes.length; i++) {
+    appliancesList.push(recipes[i].appliance);
+    bubbleSort(appliancesList);
+  }
+}
+
+export function makeArrayyy() {
+  for (let i = 0; i < recipes.length; i++) {
+    recipes[i].ustensils.some((recipes) => {
+      ustensilsList.push(
+        recipes.toLowerCase().charAt(0).toUpperCase() + recipes.slice(1)
+      );
+      bubbleSort(ustensilsList);
+    });
+  }
+}
+
 /* if(recipe.name.toLowerCase().includes(this.searchInput) || 
 recipe.description.toLowerCase().includes(this.searchInput) ||
 recipe.ingredients.forEach((ingredient) => {

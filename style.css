@@ -139,7 +139,7 @@ main {
 }
 
 #searchbar:focus {
-  outline: 3px solid #ed6454;
+  outline: 2.5px solid #ed6454;
 }
 
 #searchbar::placeholder {
@@ -231,12 +231,14 @@ main {
   border-radius: 5px;
   overflow: hidden;
   min-width: 130px;
+  
 }
 
 .combobox-controls {
   display: flex;
   justify-content: space-between;
   border-radius: 5px 5px 0 0;
+  
 }
 
 .combobox-btn {
@@ -250,9 +252,10 @@ main {
   font-size: 18px;
   position: relative;
   border-radius: 5px;
-  cursor: pointer;
   background-color: transparent;
+  cursor: pointer;
 }
+
 .combobox-btn::after {
   display: inline-block;
   font-style: normal;
@@ -274,13 +277,16 @@ main {
   height: 70px;
   width: min-content;
   background-color: transparent;
+  cursor: pointer;
 }
+
 .combobox-input::placeholder {
   color: white;
   opacity: 1;
 }
+
 .combobox-input.expanded::placeholder {
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .combobox-list {
@@ -288,43 +294,41 @@ main {
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px 50px;
-  line-height: 1em;
-  max-height: 12em;
+  line-height: 2em;
+  max-height: 26em;
+  max-width: 42em;
   color: white;
   font-size: 18px;
   padding: 10px;
   border-radius: 0 0 5px 5px;
-  overflow-y: scroll;
-  scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1);
-  scrollbar-width: thin;
+  overflow-x: scroll;
+
+  position: absolute;
+    z-index: 2;
 }
+
 .combobox-list li {
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
-#ingredients-controls {
+#ingredients-controls, #ingredients-list {
   background-color: #3282f7;
 }
 
-#appliances-controls {
+#appliances-controls, #appliances-list {
   background-color: #68d9a4;
 }
 
-#ustensils-controls {
+#ustensils-controls, #ustensils-list {
   background-color: #ed6454;
 }
 
-#ingredients-list {
-  background-color: #3282f7;
-}
 
-#appliances-list {
-  background-color: #68d9a4;
-}
 
-#ustensils-list {
-  background-color: #ed6454;
-}
 
 /** -------------------- SECTION RESULTAT -------------------- */
 #result-section {
@@ -346,19 +350,10 @@ main {
 }
 
 .recipe-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   min-width: 350px;
   min-height: 360px;
   border-radius: 5px;
