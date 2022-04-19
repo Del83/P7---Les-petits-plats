@@ -1150,7 +1150,7 @@ export const recipes = [
       {
         ingredient: "Noix de muscade",
         quantity: 1,
-        unit: "pincées",
+        unit: "pincée",
       },
     ],
     time: 20,
@@ -1255,7 +1255,7 @@ export const recipes = [
       {
         ingredient: "Noix de muscade",
         quantity: 1,
-        unit: "pincées",
+        unit: "pincée",
       },
     ],
     time: 25,

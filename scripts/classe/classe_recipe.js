@@ -1,4 +1,4 @@
-import { recipeTemplate } from "./recipe_template.js";
+import { recipeTemplate } from "../compoment/recipe_template.js";
 
 /* ---------- Classe RECIPE ---------- */
 export class Recipe {
@@ -29,7 +29,6 @@ export class Recipe {
     this.recipeCard.classList.add(this.id);
     this.recipeCard.setAttribute("id", this.id);
     this.recipeCard.innerHTML = recipeTemplate;
-    // HTML
     this.recipeCard.querySelector(".recipe-title").innerText = this.name;
     this.recipeCard.querySelector(".recipe-time").innerText =
       this.time + " min";
@@ -71,22 +70,6 @@ export class Recipe {
     this.recipeCard.querySelector(".recipe-description").innerText =
       this.ellipsis();
     return this.recipeCard;
-
-    //   const createIngredientsList = () => {
-    //     const ingredients = this.ingredients;
-    //     console.log(toLowerCase(ingredients));
-    //     //const ingredientsmini = ingredients.toLowerCase();
-    //     ingredients.forEach((ingredient) => {
-    //       ingredientstList.push(ingredient.ingredient);
-    //       console.log(ingredientstList);
-    //       /*if (ingredient.ingredient === ingredient.ingredient) {
-    //         return ingredientstList.toggle(ingredient.ingredient);
-    //       }*/
-    //     });
-    //   };
-    //   createIngredientsList();
-    //
-    // }
   }
 
   ellipsis() {
