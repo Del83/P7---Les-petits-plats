@@ -1,5 +1,5 @@
 import { recipes } from "../data/recipes.js";
-import { Recipe } from "./classe/classe_recipe.js";
+import { Recipe } from "./classe/classe_Recipe.js";
 
 /* ---------- Variables ---------- */
 let currentRecipes = recipes;
@@ -896,3 +896,297 @@ function displayRecipes() {
   });
   return newOb;
 }
+
+/* -------------------------------------------------- TOUS LES TAGS -------------------------------------------------- */
+/* export function allTag() {
+    const ingredientsListFilter = getTags.getIngredient();
+    const appliancesListFilter = getTags.getAppliance();
+    const ustensilsListFilter = getTags.getUstensils();
+    const allTags = [
+      {
+        category: "ingredients",
+        tags: ingredientsListFilter,
+      },
+      {
+        category: "appliances",
+        tags: appliancesListFilter,
+      },
+      {
+        category: "ustensils",
+        tags: ustensilsListFilter,
+      },
+    ];
+  
+    allTags.forEach((tags) => {
+      displayTag(allTags.category, tags);
+      //const testnew = new Tag(tagItem);
+      //testnew.createListTag(tagItem);
+    });
+  } */
+
+/* class DisplayTag {
+    constructor(tagItem) {
+      this.tagItem = tagItem;
+    }
+    display() {
+      let tagList = document.getElementById(`${this.tagItem.category}-list`);
+      tagList.innerText = "";
+      this.tagItem.tags.forEach((tag) => {
+        const li = document.createElement("li");
+        li.textContent = tag;
+        li.classList.add(`${this.tagItem.category}-item`);
+        li.setAttribute("data-category", this.tagItem.category);
+        li.setAttribute("data-name", tag);
+        //li.setAttribute("tabindex", "-1");
+        tagList.appendChild(li);
+      });
+      return tagList;
+    }
+  } */
+
+/* export function allTag() {
+      const ingredientsListFilter = getTags.getIngredient();
+      const appliancesListFilter = getTags.getAppliance();
+      const ustensilsListFilter = getTags.getUstensils();
+      const allTags = [
+        {
+          category: "ingredients",
+          tags: ingredientsListFilter,
+        },
+        {
+          category: "appliances",
+          tags: appliancesListFilter,
+        },
+        {
+          category: "ustensils",
+          tags: ustensilsListFilter,
+        },
+      ];
+    
+      allTags.forEach((tagItem) => {
+        const testnew = new DisplayTag(tagItem);
+        testnew.display(tagItem);
+      });
+    } */
+
+/* -------------------------------------------------- CLASSE de recherche par type de data -------------------------------------------------- */
+export class SearchIn {
+  constructor(element, inputSearchContent) {
+    this.element = element;
+    this.inputSearchContent = inputSearchContent;
+  }
+  searchInTitle() {
+    return this.element.name.toLowerCase().includes(this.inputSearchContent);
+  }
+
+  searchInDescription() {
+    return this.element.description
+      .toLowerCase()
+      .includes(this.inputSearchContent);
+  }
+
+  searchInIngredients() {
+    return this.element.ingredients.some((element) => {
+      return (
+        element.ingredient.toLowerCase().includes(this.inputSearchContent) ===
+        true
+      );
+    });
+  }
+}
+
+export function searchBarAlgo(e) {
+  const domSectionResult = document.getElementById("result-section");
+  const inputSearchContent = e.target.value.toLowerCase();
+  let currentOb = [];
+  /** ---------- SCRIPT DE LA FONCTION ---------- */
+  if (inputSearchContent.length >= 3) {
+    domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
+    recipes.filter((element) => {
+      const match = findIn(inputSearchContent, element);
+      if (match) {
+        let newOb = new Recipe(element);
+        //currentOb.push(element);
+        domSectionResult.appendChild(newOb.createRecipeCard());
+        //console.log(currentOb);
+        //displayTag(currentOb);
+      }
+    });
+  }
+  if (inputSearchContent.length < 3) {
+    displayRecipes();
+  }
+  //return currentOb;
+}
+
+/* -------------------------------------------------- CLASSE de recherche par type de data -------------------------------------------------- */
+export class SearchIn {
+  constructor(element, inputSearchContent) {
+    this.element = element;
+    this.inputSearchContent = inputSearchContent;
+  }
+  searchInTitle() {
+    return this.element.name.toLowerCase().includes(this.inputSearchContent);
+  }
+
+  searchInDescription() {
+    return this.element.description
+      .toLowerCase()
+      .includes(this.inputSearchContent);
+  }
+
+  searchInIngredients() {
+    return this.element.ingredients.some((element) => {
+      return (
+        element.ingredient.toLowerCase().includes(this.inputSearchContent) ===
+        true
+      );
+    });
+  }
+}
+
+/* -------------------------------------------------- Contrôle de la recherche -------------------------------------------------- */
+export function findIn(inputSearchContent, element) {
+  const find = new SearchIn(element, inputSearchContent);
+  find.searchInTitle();
+  find.searchInDescription();
+  find.searchInIngredients();
+
+  if (
+    find.searchInTitle() ||
+    find.searchInDescription() ||
+    find.searchInIngredients() == true
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export class ListItem {
+  constructor(tagItem) {
+    this.tagItem = tagItem;
+  }
+  createListItem() {
+    let tagList = document.getElementById(`${this.tagItem.category}-list`);
+    tagList.innerText = "";
+    this.tagItem.tags.forEach((tag) => {
+      const li = document.createElement("li");
+      li.textContent = tag;
+      li.classList.add(`${this.tagItem.category}-item`);
+      li.setAttribute("data-category", this.tagItem.category);
+      li.setAttribute("data-name", tag);
+      //li.setAttribute("tabindex", "-1");
+      tagList.appendChild(li);
+    });
+    return tagList;
+  }
+}
+
+/* --------------------------------------------------  Affichage des TAGS --------------------------------------------------  */
+export function displayTagg(element) {
+  const ingredientsListFilter = getListItem.getIngredient(element);
+  const appliancesListFilter = getListItem.getAppliance(element);
+  const ustensilsListFilter = getListItem.getUstensils(element);
+  const allTags = [
+    {
+      category: "ingredients",
+      tags: ingredientsListFilter,
+    },
+    {
+      category: "appliances",
+      tags: appliancesListFilter,
+    },
+    {
+      category: "ustensils",
+      tags: ustensilsListFilter,
+    },
+  ];
+
+  allTags.forEach((tagItem) => {
+    const testnew = new ListItem(tagItem);
+    testnew.createListItem(tagItem);
+  });
+}
+
+/* --------------------------------------------------  Affichage des tags --------------------------------------------------  */
+
+/* class Tag {
+  constructor(tagList, category) {
+    this.tagList = tagList;
+    this.category = category;
+  }
+  createListTag() {
+    this.tagList.innerText = "";
+    const li = document.createElement("li");
+    li.textContent = tag;
+    li.classList.add(`${this.category}-item`);
+    li.setAttribute("data-category", this.category);
+    li.setAttribute("data-name", tag);
+    //li.setAttribute("tabindex", "-1");
+    this.tagList.appendChild(li);
+
+    return this.tagList;
+  }
+} */
+
+/* class Tag {
+  constructor(tagList, tag, category) {
+    this.tagList = tagList;
+    this.tag = tag;
+    this.category = category;
+  }
+  createListTag() {
+    //this.tagList.innerText = "";
+    const li = document.createElement("li");
+    li.textContent = this.tag;
+    li.classList.add(`${this.category}-item`);
+    li.setAttribute("data-category", this.category);
+    li.setAttribute("data-name", this.tag);
+    console.log("boubou");
+    //li.setAttribute("tabindex", "-1");
+    //this.tagList.appendChild(li);
+    return li;
+  }
+}
+
+function displayTag(category, tags) {
+  const ingredientsListFilter = getListItem.getIngredient();
+  const appliancesListFilter = getListItem.getAppliance();
+  const ustensilsListFilter = getListItem.getUstensils();
+  const allTags = [
+    {
+      category: "ingredients",
+      tags: ingredientsListFilter,
+    },
+    {
+      category: "appliances",
+      tags: appliancesListFilter,
+    },
+    {
+      category: "ustensils",
+      tags: ustensilsListFilter,
+    },
+  ];
+
+  console.log(allTags.tags);
+  /* allTags.forEach((tags) => {
+      const tagList = document.getElementById(`${category}-list`);
+      //console.log(tags);
+      //displayTag(allTags.category, tags);
+      //const testnew = new Tag(tagItem);
+      //testnew.createListTag(tagItem);
+      for (let tag of tags) {
+        const newTagList = new Tag(tag);
+        tagList.appendChild(newTagList.createListTag());
+      }
+    }); 
+
+  //return newTagList;
+}
+
+displayTag();
+
+
+
+export { displayRecipes, displayTag }; */

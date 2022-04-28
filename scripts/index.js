@@ -1,21 +1,16 @@
-//import { recipes } from "../data/recipes.js";
-//import { Recipe } from "./classe/classe_recipe.js";
-
-import { displayRecipes } from "./classe/classe_displayRecipes.js";
-import { allTag } from "./classe/classe_searchIn.js";
+import { recipes } from "../data/recipes.js";
+import { displayRecipes } from "./display/displayRecipes.js";
 import { initTest } from "./event.js";
 
-export const searchParameters = {
-  ingredients: [],
-  appliances: [],
-  ustensils: [],
-  textSearch: "",
+export const step = {
+  currentTabRecipes: recipes,
+  filteredRecipes: recipes,
+  searchedRecipes: [],
 };
 
 /* ---------- Initialisation ---------- */
 const init = () => {
-  displayRecipes();
-  allTag();
+  displayRecipes(recipes);
   initTest();
 };
 init();

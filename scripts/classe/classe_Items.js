@@ -1,14 +1,13 @@
 import { bubbleSort } from "../compoment/bubbleSort.js";
-import { recipes } from "../../data/recipes.js";
 
 /* ------------------------------- CLASSE FABRICATION DES LISTES ----------------------- **/
-class MakeList {
+export class Items {
   constructor(recipes) {
     this.recipes = recipes;
   }
   /* ------------------------------- INGREDIENTS ----------------------- **/
-  makeListIngredient(recipes) {
-    const ingredientsList = [];
+  getIngredient() {
+    let ingredientsList = [];
     this.recipes.forEach((recipe) => {
       recipe.ingredients.forEach((item) =>
         ingredientsList.push(item.ingredient)
@@ -20,8 +19,8 @@ class MakeList {
   }
 
   /* ------------------------------- APPAREILS ----------------------- **/
-  makeListAppliance(recipes) {
-    const appliancesList = [];
+  getAppliance() {
+    let appliancesList = [];
     this.recipes.forEach((recipe) => {
       appliancesList.push(recipe.appliance);
       bubbleSort(appliancesList);
@@ -32,7 +31,7 @@ class MakeList {
 
   /* ------------------------------- USTENSILES ----------------------- **/
 
-  makeListUstensils(recipes) {
+  getUstensils() {
     let ustensilsList = [];
     this.recipes.forEach((recipe) => {
       recipe.ustensils.some((recipes) => {
@@ -46,5 +45,3 @@ class MakeList {
     return ustensilsFilter;
   }
 }
-
-export const makeList = new MakeList(recipes);
