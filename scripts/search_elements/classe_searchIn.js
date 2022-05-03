@@ -1,13 +1,8 @@
-import { Recipe } from "./classe_recipe.js";
-import { displayRecipes } from "../display/displayRecipes.js";
 import { recipes } from "../../data/recipes.js";
 import { step } from "../index.js";
-import { Items } from "./classe_Items.js";
-import { List } from "./classe_List.js";
-//import { listenTag } from "../event.js";
-
-/** -------------------------------------------------- CONSTANTES & VARIABLES -------------------------------------------------- */
-let newOb;
+import { List } from "../create_elements/classe_List.js";
+import { Items } from "../get_elements/classe_Items.js";
+import { displayRecipes } from "../display_elements/displayRecipes.js";
 
 /* -------------------------------------------------- CLASSE de recherche par type de data -------------------------------------------------- */
 export class SearchIn {
@@ -31,14 +26,16 @@ export class SearchIn {
       );
     });
   }
-  /*   searchInAppliances() {
-    return this.element.appliance.toLowerCase().includes(this.data);
+  searchInAppliances() {
+    return this.element.appliance
+      .toLowerCase()
+      .includes(this.inputSearchContent);
   }
   searchInUstensils() {
     return this.element.ustensils.some((element) => {
-      return element.toLowerCase().includes(this.data);
+      return element.toLowerCase().includes(this.inputSearchContent);
     });
-  } */
+  }
 }
 
 /* -------------------------------------------------- Contrôle de la recherche -------------------------------------------------- */
@@ -64,66 +61,72 @@ export function findIn(inputSearchContent, element) {
 export function listenInput(e) {
   const domSectionResult = document.getElementById("result-section");
   const noResult = document.getElementById("no-result");
-  const inputSearchContent = e.target.value.toLowerCase();
+  //const inputSearchContent2 = e.target.value.toLowerCase();
+  const inputSearchContent = document
+    .getElementById("searchbar")
+    .value.toLowerCase();
+  const arrayTag = Array.from(
+    document.getElementById("search-tags").childNodes
+  );
 
   /** ---------- SCRIPT DE LA FONCTION ---------- */
   if (inputSearchContent.length >= 3) {
-    domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
-    step.currentTabRecipes.filter((recipe) => {
+    step.searchedRecipes = step.filteredRecipes.filter((recipe) => {
       const match = findIn(inputSearchContent, recipe);
       if (match) {
-        step.searchedRecipes.push(recipe);
-        step.filteredRecipes = step.searchedRecipes;
-        //step.searchedRecipes = [];
-        console.log(step.filteredRecipes);
-        displayRecipes(step.filteredRecipes);
-        noResult.classList.add("hidden");
-      } else if (match === false) {
-        console.log("biboubibouy");
-        noResult.classList.remove("hidden");
+        return recipe;
       }
     });
+    if (step.searchedRecipes.length != 0) {
+      console.log(step.searchedRecipes);
+      domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
+      displayRecipes(step.searchedRecipes);
+    } else {
+      displayRecipes(step.searchedRecipes);
+      noResult.classList.remove("hidden");
+    }
+    step.currentTabRecipes = step.searchedRecipes;
+  } else if (inputSearchContent.length < 3 && arrayTag.length === 0) {
+    noResult.classList.add("hidden");
+    step.currentTabRecipes = recipes;
+    step.searchedRecipes = recipes;
+    displayRecipes(recipes);
   } else {
-    //noResult.classList.add("hidden");
-    displayRecipes(step.currentTabRecipes);
+    step.searchedRecipes = recipes;
+    step.currentTabRecipes = recipes;
+    listenTag();
   }
-  return newOb, step.searchedRecipes;
+  //return newOb, step.searchedRecipes;
 }
-
-// retrouver le filter des recipes pour ressortir une liste des recettes triées
 
 /** -------------------------------------------------- ECOUTE DES TAGS SELECTIONNES -------------------------------------------------- */
 export function listenTag() {
-  const domSectionResult = document.getElementById("result-section");
-  const tagBar = document.getElementById("search-tags").childNodes;
-  let arrayNameTag = [];
-  let arrayTag = [];
+  const arrayTag = Array.from(
+    document.getElementById("search-tags").childNodes
+  );
 
-  /** ---------- Récupération d'un tableau regroupant les tags selectionnés (nom et élément HTML) ---------- */
-  tagBar.forEach((tag) => {
-    arrayNameTag.push(tag.dataset.name);
-    arrayTag.push(tag);
-  });
   /** ---------- SCRIPT DE LA FONCTION ---------- */
-  if (arrayNameTag.length != 0) {
-    domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
-
+  if (arrayTag.length != 0) {
     arrayTag.forEach((tag) => {
       console.log("lolololo");
-      step.filteredRecipes = step.filteredRecipes.filter((recipe) => {
-        filterMatch(tag);
-        step.searchedRecipes.push(recipe);
-        step.filteredRecipes = step.currentTabRecipes;
-        step.currentTabRecipes = step.searchedRecipes;
-        newFiltersList(step.filteredRecipes);
-        displayRecipes(step.filteredRecipes);
-      });
+      filterMatch(tag);
     });
+    displayRecipes(step.currentTabRecipes);
+    //newFiltersList(step.currentTabRecipes);
+    step.filteredRecipes = step.currentTabRecipes;
+    step.currentTabRecipes = step.searchedRecipes;
   } else {
     step.filteredRecipes = recipes;
-    //listenInput();
+    listenInput();
   }
-  return newOb, arrayTag;
+  //return newOb, arrayTag;
+}
+
+/** -------------------------------------------------- ECOUTE DES TAGS SELECTIONNES -------------------------------------------------- */
+function listenInputList() {
+  const inputSearchContent = document
+    .getElementById("searchbar")
+    .value.toLowerCase();
 }
 
 /* -------------------------------------------------- Contrôle de la recherche -------------------------------------------------- */
@@ -136,7 +139,6 @@ function filterMatch(tag) {
         const match = new SearchIn(element, tagName);
         match.searchInIngredients();
         if (match.searchInIngredients() == true) {
-          //console.log("guguguhihihih");
           return true;
         }
       });
@@ -144,8 +146,9 @@ function filterMatch(tag) {
     case "appliances":
       step.currentTabRecipes = step.currentTabRecipes.filter((element) => {
         const match = new SearchIn(element, tagName);
+        console.log("bababa");
         match.searchInAppliances();
-        if (match == true) {
+        if (match.searchInAppliances() == true) {
           return true;
         }
       });
@@ -154,7 +157,7 @@ function filterMatch(tag) {
       step.currentTabRecipes = step.currentTabRecipes.filter((element) => {
         const match = new SearchIn(element, tagName);
         match.searchInUstensils();
-        if (match == true) {
+        if (match.searchInUstensils() == true) {
           return true;
         }
       });
@@ -176,31 +179,4 @@ function newFiltersList(recipes) {
   new List(ingredientsDOM, ingredients, "secondary");
   new List(appliancesDOM, appliances, "tertiary");
   new List(ustensilsDOM, ustensils, "quaternary");
-}
-
-/* -------------------------------------------------- Contrôle de la recherche -------------------------------------------------- */
-export function getTag(filter) {
-  const newList = new Items(filter);
-  const ingredientsListFilter = newList.getIngredient();
-  const appliancesListFilter = newList.getAppliance();
-  const ustensilsListFilter = newList.getUstensils();
-  const allTags = [
-    {
-      category: "ingredients",
-      tags: ingredientsListFilter,
-    },
-    {
-      category: "appliances",
-      tags: appliancesListFilter,
-    },
-    {
-      category: "ustensils",
-      tags: ustensilsListFilter,
-    },
-  ];
-
-  allTags.forEach((tagItem) => {
-    const newTags = new List(tagItem);
-    newTags.createList(tagItem);
-  });
 }

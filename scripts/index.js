@@ -1,16 +1,16 @@
 import { recipes } from "../data/recipes.js";
-import { displayRecipes } from "./display/displayRecipes.js";
-import { initTest } from "./event.js";
+import { displayRecipes } from "./display_elements/displayRecipes.js";
+import { addEventListeners } from "./event.js";
 
 export const step = {
   currentTabRecipes: recipes,
   filteredRecipes: recipes,
-  searchedRecipes: [],
+  searchedRecipes: recipes,
 };
 
 /* ---------- Initialisation ---------- */
 const init = () => {
   displayRecipes(recipes);
-  initTest();
+  addEventListeners();
 };
 init();

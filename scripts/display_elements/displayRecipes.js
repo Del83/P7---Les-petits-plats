@@ -1,5 +1,5 @@
-import { Recipe } from "../classe/classe_recipe.js";
-import { getTag } from "../classe/classe_searchIn.js";
+import { Recipe } from "../create_elements/classe_recipe.js";
+import { displayItems } from "./displayItems.js";
 
 /** -------------------------------------------------- CONSTANTES & VARIABLES -------------------------------------------------- */
 
@@ -14,7 +14,7 @@ export function displayRecipes(recipes) {
     newOb = new Recipe(recipe);
     domSectionResult.appendChild(newOb.createRecipeCard());
   });
-  getTag(recipes);
+  displayItems(recipes);
   return newOb;
 }
 

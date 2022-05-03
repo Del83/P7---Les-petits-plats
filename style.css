@@ -466,3 +466,7 @@ opacity: 0.5;
 .closeList {
   opacity: 1;
 }
+
+#no-result {
+padding-top: 10%;
+}
