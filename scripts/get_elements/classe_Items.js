@@ -8,6 +8,7 @@ export class Items {
   /* ------------------------------- INGREDIENTS ----------------------- **/
   getIngredient() {
     let ingredientsList = [];
+
     this.recipes.forEach((recipe) => {
       recipe.ingredients.forEach((item) =>
         ingredientsList.push(item.ingredient)
@@ -30,7 +31,6 @@ export class Items {
   }
 
   /* ------------------------------- USTENSILES ----------------------- **/
-
   getUstensils() {
     let ustensilsList = [];
     this.recipes.forEach((recipe) => {

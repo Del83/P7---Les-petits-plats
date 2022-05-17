@@ -1,6 +1,5 @@
 import { recipeTemplate } from "../compoment/recipe_template.js";
 
-/* ---------- Classe RECIPE ---------- */
 export class Recipe {
   constructor({
     id,
@@ -20,9 +19,9 @@ export class Recipe {
     this.description = description;
     this.appliance = appliance;
     this.ustensils = ustensils;
-    this.visible = true; /// pour la fonction de maj des listes d'items
   }
 
+  /** --------------------------------------------------  CREATION DES RECETTES -------------------------------------------------- */
   createRecipeCard() {
     this.recipeCard = document.createElement("article");
     this.recipeCard.classList.add("recipe-item");
@@ -44,7 +43,6 @@ export class Recipe {
       ingredientName.setAttribute("data-ingredient", ingredient.ingredient);
       ingredientName.innerText = ingredient.ingredient;
       ingredientDetail.appendChild(ingredientName);
-      // Adapter l'affichage aux différences de data (quantity/quantite, unit ou non, ponctuation inadéquate)
       if (ingredient.quantite || ingredient.quantity) {
         const quantiteIngredient = document.createElement("span");
         quantiteIngredient.classList.add("recipe-ingredients-detail-quantity");
@@ -72,21 +70,15 @@ export class Recipe {
     return this.recipeCard;
   }
 
+  /** --------------------------------------------------  METHODE ELLIPSIS POUR LE TEXTE DE LA DESCRIPTION DE LA RECETTE -------------------------------------------------- */
   ellipsis() {
-    ///Récupération du texte
     let text = this.description;
-    ///On remplace les suites d'espaces par un seul espace
     text = text.replace(/  +/g, " ");
-    /// si le texte est plus long que 210 caractères...
     if (text.length > 210) {
-      // On coupe les X premiers caractères...
       text = text.substr(0, 210);
-      //On coupe à nouveau pour enlever le dernier mot si il a été coupé en 2...
       text = text.substr(0, Math.min(text.length, text.lastIndexOf(" ")));
-      //On retourne le texte coupé avec les 3 points à la fin
       return text + " ...";
     } else {
-      // ou le texte si inférieur à 210 caractères
       return text;
     }
   }

@@ -2,19 +2,8 @@
 html,
 body,
 p,
-ol,
 ul,
 li,
-dl,
-dt,
-dd,
-blockquote,
-figure,
-fieldset,
-legend,
-textarea,
-pre,
-iframe,
 hr,
 h1,
 h2,
@@ -41,13 +30,8 @@ ul {
 }
 
 button,
-input,
-select {
+input {
   margin: 0;
-}
-
-html {
-  box-sizing: border-box;
 }
 
 *,
@@ -56,33 +40,9 @@ html {
   box-sizing: inherit;
 }
 
-img,
-video {
-  height: auto;
-  max-width: 100%;
-}
-
-iframe {
-  border: 0;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-td,
-th {
-  padding: 0;
-}
-
 * {
   font-family: Lato, sans-serif;
   font-weight: 400;
-}
-
-b {
-  font-weight: 700;
 }
 
 html,
@@ -113,7 +73,7 @@ main {
 }
 
 
-/** -------------------- SECTION RECHERCHE -------------------- */
+/** -------------------- ZONE DE RECHERCHE -------------------- */
 #search-section {
   width: 100%;
   margin-bottom: 20px;
@@ -159,11 +119,6 @@ main {
 
 
 /** -------------------- RECHERCHE PAR TAG -------------------- */
-#search_subfilters {
-  display: flex;
-  justify-self: start;
-}
-
 #search-tags {
   display: flex;
   flex-wrap: wrap;
@@ -182,6 +137,7 @@ main {
   }
 }
 
+/** -------------------- ZONE D'AFFICHAGE DES TAGS-------------------- */
 .tag {
   display: flex;
   flex-direction: row-reverse;
@@ -194,7 +150,6 @@ main {
   font-size: 14px;
   font-weight: 700;
   margin: 5px 20px 5px 0;
-  
 }
 
 .tag-btn {
@@ -227,12 +182,12 @@ main {
   background-color: #ed6454;
 }
 
+/** -------------------- ZONE DE RECHERCHE PAR ITEM -------------------- */
 .combobox {
   margin: 20px 20px 0 0;
   border-radius: 5px;
   overflow: hidden;
   min-width: 130px;
-  
 }
 
 .combobox-controls {
@@ -266,14 +221,6 @@ main {
   content: "\f078";
 }
 
-.chevronUp {
-  transform: rotate(180deg);
-}
-
-.chevronDown {
-  transform: rotate(360deg);
-}
-
 .combobox-input {
   border: none;
   color: white;
@@ -300,7 +247,6 @@ main {
   width: 40.32em;
 }
 
-
 .combobox-list {
   display: grid;
   width: 100%;
@@ -314,9 +260,8 @@ main {
   padding: 10px;
   border-radius: 0 0 5px 5px;
   overflow-x: scroll;
-
   position: absolute;
-    z-index: 2;
+  z-index: 2;
 }
 
 .combobox-list li {
@@ -324,7 +269,6 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 #ingredients-controls, #ingredients-list {
@@ -338,8 +282,6 @@ main {
 #ustensils-controls, #ustensils-list {
   background-color: #ed6454;
 }
-
-
 
 
 /** -------------------- SECTION RESULTAT -------------------- */
@@ -373,7 +315,6 @@ main {
   overflow: hidden;
   margin: 0;
 }
-
 
 .recipe-thumbnail {
   background-color: #c7bebe;
@@ -421,7 +362,6 @@ main {
 
 .recipe-time {
   font-weight: 900;
-  
 }
 
 .recipe-details-main {
@@ -440,7 +380,6 @@ main {
   padding: 0 1em 0 0;  
 }
 
-
 .recipe-ingredients-detail-name {
   font-weight: bold;
 }
@@ -456,17 +395,7 @@ main {
 .hidden {
   display: none;
 }
-
-.open-list {
-width: 40.32em;
-opacity: 0.5;
-
-}
-
-.closeList {
-  opacity: 1;
-}
-
+ 
 #no-result {
 padding-top: 10%;
 }

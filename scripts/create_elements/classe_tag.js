@@ -1,10 +1,8 @@
-import { displayRecipes } from "../display_elements/displayRecipes.js";
-import { listenTag } from "../search_elements/classe_searchIn.js";
-import { closeList } from "./classe_List.js";
-import { step } from "../index.js";
+import { algoTag } from "../algo.js";
 
 /* --------------------------------------------------  Création des listes de TAGS --------------------------------------------------  */
-class Tag {
+
+export class Tag {
   constructor(category) {
     this.category = category;
   }
@@ -14,48 +12,25 @@ class Tag {
     const tagContainer = document.getElementById("search-tags");
     this.category = e.target.dataset.category;
 
-    /** ---------- SCRIPT DE LA FONCTION ---------- */
-    const tag = document.createElement("span");
+    /** ---------- SCRIPT DE LA METHODE ---------- */
+    const tag = document.createElement("span"); // création d'un tag
     tag.classList.add("tag");
     tag.classList.add("tag-btn");
     tag.setAttribute("data-category", `${this.category}`);
     tag.setAttribute("data-name", e.target.innerText);
     tag.classList.add(`${this.category}-tag`);
     tag.innerText = e.target.innerText;
+    tag.addEventListener("click", (e) => {
+      this.removeTag(e); // supprime le tag si on clic dessus
+    });
     tagContainer.appendChild(tag);
+    algoTag(); // filtre les recettes selon le ou les tags selectionnés
     return tag;
   }
-}
 
-class TagAction {
-  constructor(comboboxDOM, listArray) {
-    this.comboboxDOM = comboboxDOM;
-    this.listArray = listArray;
-    this.tags = [];
-  }
-  addTag() {
-    this.listArray.forEach((element) =>
-      element.addEventListener("click", (e) => {
-        const category = e.target.dataset.category;
-        const newTag = new Tag();
-        newTag.createTag(e);
-        closeList(this.comboboxDOM, category);
-        this.tags = Array.from(document.querySelectorAll(".tag"));
-        listenTag();
-        console.log(this.tags);
-        this.removeTag();
-        console.log(step.currentTabRecipes);
-      })
-    );
-  }
-  removeTag() {
-    this.tags.forEach((tag) => {
-      tag.addEventListener("click", (e) => {
-        tag.remove();
-        listenTag();
-      });
-    });
+  /** ---------------------------------------- Supprimer le TAG selectionné ---------------------------------------- */
+  removeTag(e) {
+    e.target.remove(); // supprime le tag
+    algoTag(); // filtre les recettes selon le ou les tags supprimés
   }
 }
-
-export { Tag, TagAction };

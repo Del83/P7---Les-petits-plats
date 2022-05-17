@@ -1,34 +1,19 @@
 import { Recipe } from "../create_elements/classe_recipe.js";
-import { displayItems } from "./displayItems.js";
-
-/** -------------------------------------------------- CONSTANTES & VARIABLES -------------------------------------------------- */
-
-let newOb;
+import { List } from "../create_elements/classe_List.js";
 
 /* --------------------------------------------------  AFFICHAGE DES RECETTES en programmation fonctionnelle --------------------------------------------------  */
 
 export function displayRecipes(recipes) {
-  const domSectionResult = document.getElementById("result-section");
-  domSectionResult.innerHTML = "";
+  /** ---------- ELEMENTS DU DOM ---------- */
+  const domSectionResult = document.getElementById("result-section"); // section d'affichage des recettes
+  let newOb;
+
+  /** ---------- SCRIPT DE LA FONCTION ---------- */
+  domSectionResult.innerHTML = ""; // efface les recettes affichées
   recipes.forEach((recipe) => {
-    newOb = new Recipe(recipe);
-    domSectionResult.appendChild(newOb.createRecipeCard());
+    newOb = new Recipe(recipe); // création des recettes
+    domSectionResult.appendChild(newOb.createRecipeCard()); // affiche dans le DOM les recettes
   });
-  displayItems(recipes);
+  new List().displayList(recipes); // création des listes grâce aux informations des recettes
   return newOb;
 }
-
-/* export class RecipesDisplay {
-  constructor(recipes) {
-    this.recipes = recipes;
-    this.addRecipes();
-  }
-  addRecipes() {
-    const domSectionResult = document.getElementById("result-section");
-    domSectionResult.innerHTML = "";
-    this.recipes.forEach((recipe) => {
-      let newOb = new Recipe(recipe);
-      domSectionResult.appendChild(newOb.createRecipeCard());
-    });
-  }
-} */
