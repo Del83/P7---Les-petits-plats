@@ -19,12 +19,14 @@ export function algoSearchBar() {
 
   /** ---------- SCRIPT DE LA FONCTION ---------- */
   if (inputSearchContent.length >= 3) {
-    step.searchedRecipes = step.filteredRecipes.filter((recipe) => {
+    let result = [];
+    for (const recipe of step.filteredRecipes) {
       const match = new SearchIn().findIn(inputSearchContent, recipe);
       if (match) {
-        return recipe;
+        result.push(recipe);
       }
-    });
+    }
+    step.searchedRecipes = result;
 
     if (step.searchedRecipes.length != 0) {
       domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
