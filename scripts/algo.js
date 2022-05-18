@@ -12,7 +12,9 @@ export function algoSearchBar() {
   const inputSearchContent = document
     .getElementById("searchbar")
     .value.toLowerCase()
-    .replace(/\s/g, "");
+    .replace(/\s/g, "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
   const tagArray = Array.from(
     document.getElementById("search-tags").childNodes
   );
@@ -26,12 +28,13 @@ export function algoSearchBar() {
       }
     });
 
-    if (step.searchedRecipes.length != 0) {
-      domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
-      displayRecipes(step.searchedRecipes);
-    } else {
+    if (step.searchedRecipes.length == 0) {
       displayRecipes(step.searchedRecipes);
       noResult.classList.remove("hidden");
+    } else {
+      domSectionResult.innerHTML = ""; // Vide le DOM de la galerie
+      displayRecipes(step.searchedRecipes);
+      noResult.classList.add("hidden");
     }
     step.currentTabRecipes = step.searchedRecipes;
   } else if (inputSearchContent.length < 3 && tagArray.length === 0) {
@@ -113,25 +116,25 @@ class SearchIn {
     this.inputSearchContent = inputSearchContent;
   }
   searchInTitle() {
-    return this.element.name.toLowerCase().includes(this.inputSearchContent);
+    return this.normalize(this.element.name).includes(this.inputSearchContent);
   }
+
   searchInDescription() {
-    return this.element.description
-      .toLowerCase()
-      .includes(this.inputSearchContent);
+    return this.normalize(this.element.description).includes(
+      this.inputSearchContent
+    );
   }
   searchInIngredients() {
     return this.element.ingredients.some((element) => {
-      return (
-        element.ingredient.toLowerCase().includes(this.inputSearchContent) ===
-        true
+      return this.normalize(element.ingredient).includes(
+        this.inputSearchContent
       );
     });
   }
   searchInAppliances() {
-    return this.element.appliance
-      .toLowerCase()
-      .includes(this.inputSearchContent);
+    return this.normalize(this.element.appliance).includes(
+      this.inputSearchContent
+    );
   }
   searchInUstensils() {
     return this.element.ustensils.some((element) => {
@@ -141,9 +144,6 @@ class SearchIn {
 
   findIn(inputSearchContent, element) {
     const find = new SearchIn(element, inputSearchContent);
-    find.searchInTitle();
-    find.searchInDescription();
-    find.searchInIngredients();
 
     if (
       find.searchInTitle() ||
@@ -154,6 +154,13 @@ class SearchIn {
     } else {
       return false;
     }
+  }
+
+  normalize(element) {
+    return element
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
   }
 }
 

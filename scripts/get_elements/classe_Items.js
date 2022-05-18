@@ -10,9 +10,10 @@ export class Items {
     let ingredientsList = [];
 
     this.recipes.forEach((recipe) => {
-      recipe.ingredients.forEach((item) =>
-        ingredientsList.push(item.ingredient)
-      );
+      recipe.ingredients.forEach((item) => {
+        ingredientsList.push(item.ingredient);
+      });
+
       bubbleSort(ingredientsList);
     });
     const ingredientsFilter = [...new Set(ingredientsList)];

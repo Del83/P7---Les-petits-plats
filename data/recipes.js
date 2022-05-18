@@ -14,7 +14,7 @@ export const recipes = [
         quantity: 2,
       },
       {
-        ingredient: "Crème de coco",
+        ingredient: "Créme de coco",
         quantity: 2,
         unit: "cuillères à soupe",
       },
